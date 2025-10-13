@@ -5,27 +5,33 @@ import { supabase } from "./supabaseClient";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import Clients from "./pages/Clients";
+import Projects from "./pages/Projects";
+import Invoices from "./pages/Invoices";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
+        element: <Dashboard />,
         errorElement: <NotFoundPage />,
     },
     {
-        path: "/login",
-        element: <Login />,
+        path: "/clients",
+        element: <Clients />,
         errorElement: <NotFoundPage />,
     },
     {
-        path: "/signup",
-        element: <Signup />,
+        path: "/projects",
+        element: <Projects />,
         errorElement: <NotFoundPage />,
     },
+    {
+        path: "/invoices",
+        element: <Invoices />,
+        errorElement: <NotFoundPage />,
+    }
 ]);
 
 export default function App() {
