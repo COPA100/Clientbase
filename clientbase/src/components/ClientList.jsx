@@ -11,13 +11,13 @@ export default function ClientList() {
                     Colin Park
                 </h1>
                 <div className="flex gap-4">
-                    <button className="bg-blue-500 px-2 py-2 rounded-lg text-white font-semibold">
+                    <button className="bg-blue-500 px-2 py-2 rounded-lg text-white font-semibold cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-200">
                         <img
                             src={editIcon}
                             className="brightness-0 invert w-5 h-5"
                         ></img>
                     </button>
-                    <button className="bg-red-500 px-2 py-2 rounded-lg text-white font-semibold">
+                    <button className="bg-red-500 px-2 py-2 rounded-lg text-white font-semibold cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-200">
                         <img
                             src={deleteIcon}
                             className="brightness-0 invert w-5 h-5"
