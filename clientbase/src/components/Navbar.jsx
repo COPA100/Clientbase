@@ -9,7 +9,7 @@ export default function Navbar() {
 
     return (
         <>
-            <div className="fixed left-0 top-0 w-full h-14 bg-primary shadow-md z-50">
+            <div className="fixed left-0 top-0 w-full h-14 bg-primary shadow-md z-40">
                 <div className="flex justify-between items-center h-full px-8">
                     <ul className="flex items-center gap-8 text-white font-semibold">
                         <li>
