@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+    --color-primary: #0f172a;
+    --color-primary-hover: #1e293b;
+    --color-secondary: #3b82f6;
+    --color-secondary-hover: #2563eb;
+    --color-accent: #60a5fa;
+    --color-background: #f8fafc;
+    --color-text: #1e293b;
+}
+
 .font-montserrat {
     font-family: "Montserrat", sans-serif;
 }

@@ -1,4 +1,4 @@
-# ClientBase
+# Clientbase
 
 **Purpose:**  
 A lightweight CRM to help freelancers manage clients, projects, and invoices efficiently.
