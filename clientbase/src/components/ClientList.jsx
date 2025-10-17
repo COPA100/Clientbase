@@ -32,7 +32,7 @@ export default function ClientList() {
             {/* list item */}
             <div className="w-full font-montserrat bg-white px-5 py-3 flex justify-between items-center gap-4">
                 <h1 className="text-xl text-text font-semibold">
-                    Colin Park
+                    Sajid Islam
                 </h1>
                 <div className="flex gap-4">
                     <button className="bg-secondary px-2 py-2 rounded-lg text-white font-semibold cursor-pointer hover:bg-secondary-hover hover:shadow-lg transition-all duration-200">
