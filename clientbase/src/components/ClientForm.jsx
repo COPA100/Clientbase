@@ -18,6 +18,12 @@ export default function ClientForm({ open, onClose }) {
                                 placeholder="Name of client"
                                 className="w-full px-3 py-1 outline-1 outline-gray-200 rounded-lg"
                             ></input>
+                            <p>Notes</p>
+                            <input
+                                type="text"
+                                placeholder="Write notes here"
+                                className="w-full px-3 py-1 outline-1 outline-gray-200 rounded-lg"
+                            ></input>
                         </div>
                         <div className="flex w-full justify-end gap-3 pt-1 pr-6 pb-3 font-semibold">
                             <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-lg cursor-pointer">

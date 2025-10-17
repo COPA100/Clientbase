@@ -18,6 +18,15 @@ export default function ProjectForm({ open, onClose }) {
                                 placeholder="Name of project"
                                 className="w-full px-3 py-1 outline-1 outline-gray-200 rounded-lg"
                             ></input>
+                            <p>Deadline</p>
+                            <input
+                                type="date"
+                                className="px-3 py-1 outline-1 outline-gray-200 rounded-lg"
+                            ></input>
+                            <p>Client</p>
+                            <p>DROPDOWN MENU HERE TO PICK CLIENT</p>
+                            <p>Status</p>
+                            <p>DROPDOWN MENU HERE TO PICK STATUS</p>
                         </div>
                         <div className="flex w-full justify-end gap-3 pt-1 pr-6 pb-3 font-semibold">
                             <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-lg cursor-pointer">
