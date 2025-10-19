@@ -2,7 +2,6 @@ import { useState } from "react";
 import { addClient } from "../api/clients";
 
 export default function ClientForm({ open, onClose }) {
-
     const [name, setName] = useState("");
     const [notes, setNotes] = useState("");
 
@@ -13,7 +12,7 @@ export default function ClientForm({ open, onClose }) {
             setName("");
             setNotes("");
 
-            // more efficient way probably
+            // more efficient way than reloading page probably
             window.location.reload();
         } catch (e) {
             console.error(e);
@@ -50,7 +49,10 @@ export default function ClientForm({ open, onClose }) {
                             ></input>
                         </div>
                         <div className="flex w-full justify-end gap-3 pt-1 pr-6 pb-3 font-semibold">
-                            <button onClick={handleSubmit} className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-lg cursor-pointer">
+                            <button
+                                onClick={handleSubmit}
+                                className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-lg cursor-pointer"
+                            >
                                 Add
                             </button>
                             <button
