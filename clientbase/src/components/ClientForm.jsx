@@ -1,6 +1,26 @@
 import { useState } from "react";
+import { addClient } from "../api/clients";
 
 export default function ClientForm({ open, onClose }) {
+
+    const [name, setName] = useState("");
+    const [notes, setNotes] = useState("");
+
+    async function handleSubmit() {
+        if (!name.trim()) return;
+        try {
+            await addClient({ name: name.trim(), notes: notes.trim() });
+            setName("");
+            setNotes("");
+
+            // more efficient way probably
+            window.location.reload();
+        } catch (e) {
+            console.error(e);
+            alert("Failed to add client");
+        }
+    }
+
     return (
         <>
             {open && (
@@ -17,16 +37,20 @@ export default function ClientForm({ open, onClose }) {
                                 type="text"
                                 placeholder="Name of client"
                                 className="w-full px-3 py-1 outline-1 outline-gray-200 rounded-lg"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                             ></input>
                             <p>Notes</p>
                             <input
                                 type="text"
                                 placeholder="Write notes here"
                                 className="w-full px-3 py-1 outline-1 outline-gray-200 rounded-lg"
+                                value={notes}
+                                onChange={(e) => setNotes(e.target.value)}
                             ></input>
                         </div>
                         <div className="flex w-full justify-end gap-3 pt-1 pr-6 pb-3 font-semibold">
-                            <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-lg cursor-pointer">
+                            <button onClick={handleSubmit} className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-lg cursor-pointer">
                                 Add
                             </button>
                             <button
