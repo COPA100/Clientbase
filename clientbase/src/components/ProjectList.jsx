@@ -42,15 +42,52 @@ export default function ProjectList() {
 
     async function handleEdit(project) {
         const newName = window.prompt("Edit project name:", project.name || "");
-
         if (newName === null) return;
-
         const name = newName.trim();
-        if (!name || name === project.name) return;
+        if (!name) return;
+
+        const newDesc = window.prompt(
+            "Edit description:",
+            project.description || ""
+        );
+        if (newDesc === null) return;
+        const description = newDesc.trim();
+
+        // date format (YYYY-MM-DD)
+        const currentDate = project.deadline
+            ? String(project.deadline).slice(0, 10)
+            : "";
+        const newDate = window.prompt(
+            "Edit deadline (YYYY-MM-DD):",
+            currentDate
+        );
+        if (newDate === null) return;
+        const deadlineInput = newDate.trim();
+        const deadline = deadlineInput === "" ? null : deadlineInput;
+
+        const newStatus = window.prompt(
+            "Edit status (Active, Completed, On-Hold):",
+            project.status || "Active"
+        );
+        if (newStatus === null) return;
+        const allowed = ["Active", "Completed", "On-Hold"];
+        const status = allowed.includes(newStatus.trim())
+            ? newStatus.trim()
+            : project.status || "Active";
+
         try {
-            await updateProject(project.id, { name });
+            await updateProject(project.id, {
+                name,
+                description,
+                deadline,
+                status,
+            });
             setProjectData((prev) =>
-                prev.map((p) => (p.id === project.id ? { ...p, name } : p))
+                prev.map((p) =>
+                    p.id === project.id
+                        ? { ...p, name, description, deadline, status }
+                        : p
+                )
             );
         } catch (e) {
             console.error(e);
@@ -93,6 +130,11 @@ export default function ProjectList() {
                                     <h1 className="text-xl text-text font-semibold">
                                         {p.name}
                                     </h1>
+                                    {p.description ? (
+                                        <p className="text-sm text-gray-600">
+                                            {p.description}
+                                        </p>
+                                    ) : null}
                                     <p>{clientName}</p>
                                     <p
                                         className={`${statusBg} w-fit rounded-lg px-3 py-1 font-semibold`}
