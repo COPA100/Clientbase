@@ -15,7 +15,7 @@ export async function getProjectsByClient(clientId) {
 	const { data, error } = await supabase
 		.from("projects")
 		.select("*")
-		.eq("client_id", clientId)
+		.eq("client_id", Number(clientId))
 		.order("created_at", { ascending: false });
 	if (error) {
 		throw error;
