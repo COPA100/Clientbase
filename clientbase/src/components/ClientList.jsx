@@ -53,8 +53,8 @@ export default function ClientList() {
     return (
         <>
             {clientData.length === 0 && (
-                <div className="w-full font-montserrat bg-white px-5 py-3 flex justify-between items-center gap-4">
-                    <h1>No clients yet...</h1>
+                <div className="w-full font-montserrat bg-white px-5 py-3 flex justify-center items-center gap-4">
+                    <h1 className="py-1">No clients yet...</h1>
                 </div>
             )}
             {clientData.map((client, index) => (
