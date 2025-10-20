@@ -60,13 +60,13 @@ export default function ClientList() {
             {clientData.map((client, index) => (
                 <div key={client.id}>
                     <div className="w-full font-montserrat bg-white px-5 py-3 flex justify-between items-center gap-4">
-                        <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-1 flex-1 min-w-0">
                             <h1 className="text-xl text-text font-semibold">
                                 {client.name}
                             </h1>
                             <p>{client.notes}</p>
                         </div>
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 flex-shrink-0">
                             <button
                                 onClick={() => handleEdit(client)}
                                 className="bg-secondary px-2 py-2 rounded-lg text-white font-semibold cursor-pointer hover:bg-secondary-hover hover:shadow-lg transition-all duration-200"

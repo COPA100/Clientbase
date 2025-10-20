@@ -125,7 +125,7 @@ export default function ProjectList() {
                         <div key={p.id || idx}>
                             {/* list item */}
                             <div className="w-full font-montserrat bg-white px-5 py-3 flex justify-between items-center gap-4">
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-col gap-1 flex-1 min-w-0">
                                     <p>{dateDisplay}</p>
                                     <h1 className="text-xl text-text font-semibold">
                                         {p.name}
@@ -142,7 +142,7 @@ export default function ProjectList() {
                                         {statusText}
                                     </p>
                                 </div>
-                                <div className="flex gap-4">
+                                <div className="flex gap-4 flex-shrink-0">
                                     <button
                                         onClick={() => handleEdit(p)}
                                         className="bg-secondary px-2 py-2 rounded-lg text-white font-semibold cursor-pointer hover:bg-secondary-hover hover:shadow-lg transition-all duration-200"

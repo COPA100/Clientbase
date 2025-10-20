@@ -9,7 +9,7 @@ export default function Dashboard() {
         <>
             <div className="bg-background min-h-screen w-full">
                 <Navbar />
-                <div className="max-w-7xl mx-auto pt-20 px-6 py-8">
+                <div className="max-w-7xl mx-auto pt-30 px-6 py-8">
                     <h1 className="text-4xl font-bold text-text mb-8">
                         Dashboard
                     </h1>
