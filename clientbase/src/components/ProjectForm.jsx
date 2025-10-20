@@ -1,6 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { addProject } from "../api/projects";
+import { getClients } from "../api/clients";
 
 export default function ProjectForm({ open, onClose }) {
+    const [name, setName] = useState("");
+    // use this format: YYYY-MM-DD
+    const [deadline, setDeadline] = useState("");
+
+    const [clientId, setClientId] = useState("");
+    const [status, setStatus] = useState("Active");
+    const [clients, setClients] = useState([]);
+    const [loadingClients, setLoadingClients] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+
+    useEffect(() => {
+        if (!open) return;
+        async function load() {
+            setLoadingClients(true);
+            try {
+                const data = await getClients();
+                setClients(data || []);
+            } catch (e) {
+                console.error(e);
+                alert("Failed to load clients");
+            } finally {
+                setLoadingClients(false);
+            }
+        }
+        load();
+    }, [open]);
+
+    async function handleSubmit() {
+        if (!name.trim()) return;
+        if (!clientId) return;
+        try {
+            setSubmitting(true);
+            await addProject({
+                name: name.trim(),
+                deadline: deadline || null,
+                client_id: clientId,
+                status,
+            });
+            setName("");
+            setDeadline("");
+            setClientId("");
+            setStatus("Active");
+
+            window.location.reload();
+        } catch (e) {
+            console.error(e);
+            alert("Failed to add project");
+        } finally {
+            setSubmitting(false);
+        }
+    }
+
     return (
         <>
             {open && (
@@ -17,20 +71,59 @@ export default function ProjectForm({ open, onClose }) {
                                 type="text"
                                 placeholder="Name of project"
                                 className="w-full px-3 py-1 outline-1 outline-gray-200 rounded-lg"
-                            ></input>
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
                             <p>Deadline</p>
                             <input
                                 type="date"
                                 className="px-3 py-1 outline-1 outline-gray-200 rounded-lg"
-                            ></input>
+                                value={deadline}
+                                onChange={(e) => setDeadline(e.target.value)}
+                            />
                             <p>Client</p>
-                            <p>DROPDOWN MENU HERE TO PICK CLIENT</p>
+                            <select
+                                className="w-full px-3 py-1 outline-1 outline-gray-200 rounded-lg bg-white"
+                                value={clientId}
+                                onChange={(e) => setClientId(e.target.value)}
+                                disabled={loadingClients}
+                            >
+                                <option value="">
+                                    {loadingClients
+                                        ? "Loading clients..."
+                                        : "Select a client"}
+                                </option>
+                                {!loadingClients &&
+                                    clients.map((c) => (
+                                        <option key={c.id} value={c.id}>
+                                            {c.name}
+                                        </option>
+                                    ))}
+                            </select>
                             <p>Status</p>
-                            <p>DROPDOWN MENU HERE TO PICK STATUS</p>
+                            <select
+                                className="w-full px-3 py-1 outline-1 outline-gray-200 rounded-lg bg-white"
+                                value={status}
+                                onChange={(e) => setStatus(e.target.value)}
+                            >
+                                <option value="Active">Active</option>
+                                <option value="Completed">Completed</option>
+                                <option value="On-Hold">On-Hold</option>
+                            </select>
                         </div>
                         <div className="flex w-full justify-end gap-3 pt-1 pr-6 pb-3 font-semibold">
-                            <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-lg cursor-pointer">
-                                Add
+                            <button
+                                onClick={handleSubmit}
+                                disabled={
+                                    submitting || !name.trim() || !clientId
+                                }
+                                className={`bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-lg cursor-pointer ${
+                                    submitting || !name.trim() || !clientId
+                                        ? "opacity-60 cursor-not-allowed"
+                                        : ""
+                                }`}
+                            >
+                                {submitting ? "Adding..." : "Add"}
                             </button>
                             <button
                                 onClick={onClose}

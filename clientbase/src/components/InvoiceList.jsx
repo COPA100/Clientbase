@@ -2,7 +2,29 @@ import { useState } from "react";
 import deleteIcon from "../assets/deleteIcon.svg";
 import editIcon from "../assets/editIcon.svg";
 
+import { getInvoices, updateInvoice, deleteInvoice } from "../api/invoices";
+
 export default function InvoiceList() {
+    const [invoiceData, setInvoiceData] = useState([]);
+
+    async function handleDelete(id) {
+        const ok = window.confirm("Delete this client?");
+        if (!ok) return;
+        try {
+            await deleteInvoice(id);
+            setInvoiceData((prev) => prev.filter((c) => c.id !== id));
+        }
+        catch (e) {
+            console.error(e);
+            alert("Failed to delete client");
+        }
+    }
+
+    async function handleEdit(client) {
+        
+    }
+
+
     return (
         <>
             {/* list item */}
