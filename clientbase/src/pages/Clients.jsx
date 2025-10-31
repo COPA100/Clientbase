@@ -5,6 +5,12 @@ import Navbar from "../components/Navbar";
 
 export default function Clients() {
     const [form, setForm] = useState(false);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+    const handleClientAdded = () => {
+        setForm(false);
+        setRefreshTrigger(old => old + 1);
+    };
 
     return (
         <>
@@ -13,6 +19,7 @@ export default function Clients() {
                 <ClientForm
                     open={form}
                     onClose={() => setForm(false)}
+                    onSuccess={handleClientAdded}
                 ></ClientForm>
                 <div className="pt-20 px-4 flex flex-col items-center justify-center gap-6">
                     <button
@@ -22,7 +29,7 @@ export default function Clients() {
                         Add Client
                     </button>
                     <div className="w-full max-w-[800px] min-w-[300px] overflow-hidden rounded-lg border border-gray-200 shadow-lg">
-                        <ClientList></ClientList>
+                        <ClientList refreshTrigger={refreshTrigger}></ClientList>
                     </div>
                 </div>
             </div>

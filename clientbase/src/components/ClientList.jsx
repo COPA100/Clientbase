@@ -4,7 +4,7 @@ import editIcon from "../assets/editIcon.svg";
 
 import { getClients, updateClient, deleteClient } from "../api/clients";
 
-export default function ClientList() {
+export default function ClientList({ refreshTrigger }) {
     const [clientData, setClientData] = useState([]);
 
     async function handleDelete(id) {
@@ -48,7 +48,7 @@ export default function ClientList() {
         }
 
         load();
-    }, []);
+    }, [refreshTrigger]); // this will run again when refreshTrigger changes
 
     return (
         <>

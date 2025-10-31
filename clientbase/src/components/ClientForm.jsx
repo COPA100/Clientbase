@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addClient } from "../api/clients";
 
-export default function ClientForm({ open, onClose }) {
+export default function ClientForm({ open, onClose, onSuccess }) {
     const [name, setName] = useState("");
     const [notes, setNotes] = useState("");
 
@@ -11,9 +11,10 @@ export default function ClientForm({ open, onClose }) {
             await addClient({ name: name.trim(), notes: notes.trim() });
             setName("");
             setNotes("");
-
-            // more efficient way than reloading page probably
-            window.location.reload();
+            
+            if (onSuccess) {
+                onSuccess();
+            }
         } catch (e) {
             console.error(e);
             alert("Failed to add client");
